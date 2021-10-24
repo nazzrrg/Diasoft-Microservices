@@ -20,3 +20,5 @@ databaseChangeLog:
                   constraints:
                     unique: false
                     nullable: false
+  - includeAll:
+      path: db/changelog/test_data/

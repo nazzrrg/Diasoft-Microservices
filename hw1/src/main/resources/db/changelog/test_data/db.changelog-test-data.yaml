@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-test-data.yaml
+  - changeSet:
+      id: 2
+      author: java
+      context: test
+      changes:
+        - insert:
+            tableName: greetings
+            columns:
+              - column:
+                  name: content
+                  value: "test1"
+        - insert:
+            tableName: greetings
+            columns:
+              - column:
+                  name: content
+                  value: "test2"

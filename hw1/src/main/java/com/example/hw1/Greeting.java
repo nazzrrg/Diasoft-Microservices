@@ -27,4 +27,8 @@ public class Greeting {
 
     @Column(name = "content")
     private String content;
+
+    public Greeting(String content) {
+        this.content = content;
+    }
 }
