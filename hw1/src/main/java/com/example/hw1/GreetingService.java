@@ -1,19 +1,22 @@
 package com.example.hw1;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class GreetingService {
-    private final GreetingRepository greetingRepository;
 
-    public GreetingService(GreetingRepository greetingRepository) {
-        this.greetingRepository = greetingRepository;
-    }
+    @Autowired
+    private GreetingRepository greetingRepository;
 
-    public void save(Greeting greeting) {
-        greetingRepository.save(greeting);
+    public void create(Greeting greeting) {
+        if (greetingRepository.existsById(greeting.getId())) {
+            throw new ElementAlreadyExistsException();
+        } else {
+            greetingRepository.save(greeting);
+        }
     }
 
     public List<Greeting> getAll() {
@@ -24,11 +27,16 @@ public class GreetingService {
         return greetingRepository.findById(id).orElseThrow(ElementNotFoundException::new);
     }
 
-    public void delete(Long id) {
-        greetingRepository.deleteById(id);
+    public void update(long id, Greeting greeting) {
+        if (greetingRepository.existsById(greeting.getId())) {
+            greeting.setId(id);
+            greetingRepository.save(greeting);
+        } else {
+            throw new ElementNotFoundException();
+        }
     }
 
-    public void update(Greeting greeting) {
-        save(greeting);
+    public void delete(Long id) {
+        greetingRepository.deleteById(id);
     }
 }

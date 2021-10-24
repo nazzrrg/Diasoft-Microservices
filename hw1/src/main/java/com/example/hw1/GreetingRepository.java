@@ -1,7 +1,7 @@
 package com.example.hw1;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GreetingRepository extends CrudRepository<Greeting, Long> {}
+public interface GreetingRepository extends JpaRepository<Greeting, Long> {}
